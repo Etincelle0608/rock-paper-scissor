@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rock Paper Scissors</title>
+</head>
+<body>
+    <script>
+        const HAND_SYMBOLS= ['Rock', 'Paper', 'Scissors'];
+        function computerPlay (){ //this function returns a random symbols contening in array HAND_SYMBOLS
+            return HAND_SYMBOLS[Math.floor(Math.random() * HAND_SYMBOLS.length)];
+        }
+        let playerSelection = null;
+        let computerSelection = null;
+
+
+        function game(){ //here is the function which demand 5 enters and return the five result 
+            let result= [];
+            let winGame=0;
+            let loseGame=0;
+            let combination=null;
+            for (let i=0; i<5; i++){
+                playerSelection = prompt("Enter your 'Rock', 'Paper' or 'Scissors' element");
+                computerSelection = computerPlay();
+                combination=playRound(playerSelection, computerSelection);
+                result[i]=combination;
+                (combination.slice(0, 7)=="You win") ? winGame+=1 : loseGame+=1;
+                
+            }
+            for (let i=0; i<5; i++) console.log(result[i]);//give the 5 results
+            return  (winGame > loseGame) ? "you have WIN the game" :  "you have LOSE the game"; // tell you if you win the game or not
+
+        }
+        
+        function playRound(playerSelection, computerSelection) {
+            let playerPlay=null;
+            let lowerPlay=null;
+            //here is the function which gives the word enter in the capitalize form
+            lowerPlay= playerSelection.slice(1);
+            playerPlay=playerSelection.charAt(0).toUpperCase() + lowerPlay.toLowerCase();
+            //end of the function
+
+            //the function which helps to matcch result
+            switch (computerSelection) {
+
+                case "Rock": 
+                    if (playerPlay=="Rock"){
+                        return "It is a draw game.\nYou choose Rock's element at the same time.";
+                    }
+                    if (playerPlay=="Paper"){
+                        return "You win.\nPaper beats Rock.";
+                    }
+                    if (playerPlay=="Scissors"){
+                        return "You lose.\nRock beats Scissors.";
+                    }
+                    break;
+
+                case "Scissors": 
+                    if (playerPlay=="Scissors"){
+                        return "It is a draw game.\nYou choose Scissors's element at the same time.";
+                    }
+                    if (playerPlay=="Rock"){
+                        return "You win.\nRock beats Scissors.";
+                    }
+                    if (playerPlay=="Paper"){
+                        return "You lose.\nScissors beats Paper.";
+                    }
+                    break;
+            
+                case "Paper": 
+                    if (playerPlay=="Paper"){
+                        return "It is a draw game.\nYou choose Paper's element at the same time.";
+                    }
+                    if (playerPlay=="Scissors"){
+                        return "You win.\nScissors beats Paper.";
+                    }
+                    if (playerPlay=="Rock"){
+                        return "You lose.\nPaper beats Rock.";
+                    }
+                
+                    break;
+                      
+                    
+            }
+
+        }
+
+//the end form that the console applies
+    console.log(game());
+    </script>
+    
+</body>
+</html>
